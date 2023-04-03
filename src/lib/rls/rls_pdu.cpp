@@ -55,7 +55,7 @@ void EncodeRlsMessage(const RlsMessage &msg, OctetString &stream)
 
 std::unique_ptr<RlsMessage> DecodeRlsMessage(const OctetView &stream)
 {
-    auto first = stream.readI(); // (Just for old RLS compatibility)
+    auto first = stream.read2I(); // (Just for old RLS compatibility)
     std::cout<< first<<std::endl;
     if (first != 3)
         return nullptr;
