@@ -7,7 +7,7 @@
 //
 
 #include "udp_task.hpp"
-
+#include<iostream>
 #include <cmath>
 #include <cstdint>
 #include <cstring>
@@ -75,6 +75,10 @@ void RlsUdpTask::onLoop()
     InetAddress peerAddress;
 
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
+    for(int i =0;i<BUFFER_SIZE;i++){
+        std::cout<<buffer[i]<<" "<<;
+    }
+    std::cout<<std::endl;
     if (size > 0)
     {
         auto rlsMsg = rls::DecodeRlsMessage(OctetView{buffer, static_cast<size_t>(size)});
