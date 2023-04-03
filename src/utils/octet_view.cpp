@@ -44,6 +44,12 @@ std::string OctetView::readUtf8String(int length) const
     return res;
 }
 
+std::string OctetView::getData(int length) const
+{
+    auto res = std::string(data +0, data +length);
+    return res;
+}
+
 std::string OctetView::readUtf8String(size_t length) const
 {
     return readUtf8String(static_cast<int>(length));

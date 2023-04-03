@@ -9,6 +9,7 @@
 #include "rls_pdu.hpp"
 
 #include <utils/constants.hpp>
+#include<iostream>
 
 namespace rls
 {
@@ -55,6 +56,7 @@ void EncodeRlsMessage(const RlsMessage &msg, OctetString &stream)
 std::unique_ptr<RlsMessage> DecodeRlsMessage(const OctetView &stream)
 {
     auto first = stream.readI(); // (Just for old RLS compatibility)
+    std::cout<< first<<std::endl;
     if (first != 3)
         return nullptr;
 
