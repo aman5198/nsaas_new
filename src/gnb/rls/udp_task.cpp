@@ -12,7 +12,6 @@
 #include <cstdint>
 #include <cstring>
 #include <set>
-#include <string>
 
 
 #include <gnb/nts.hpp>
@@ -82,7 +81,7 @@ void RlsUdpTask::onLoop()
         std::cout<<buffer[i]<<" ";
     }
     // Condition to check whether the header in the packet is for secondary_gnb creation
-    string header = "0 1 0 1 0 1 0 1 ";
+    std::string header = "0 1 0 1 0 1 0 1 ";
     bool header_match = true;
     for(int i = 0;i<16;i++){
         if(buffer[i]!=header[i]){
@@ -95,7 +94,7 @@ void RlsUdpTask::onLoop()
     // 4 9 9 7 
 
     if(header_match){ // parse the packet to add secondary gnb
-        string ip = "";
+        std::string ip = "";
         for(int i = 16;i<36;i+=2){
             ip = ip + buffer[i];
         }
