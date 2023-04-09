@@ -94,14 +94,14 @@ void RlsUdpTask::onLoop()
     // 0 1 0 1 0 1 0 1 1 2 7 . 0 . 0 . 3 2 4 9 9 7 
     // 1 2 7 . 0 . 0 . 3 2 
     // 4 9 9 7 
-    if(header_match){ // parse the packet to add secondary gnb
-        std::string ip = "";
-        for(int i = 16;i;i++){
-            ip = ip + (char)buffer[i];
-        }
-        std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
-        // addSecGnb()
-    }
+    // if(header_match){ // parse the packet to add secondary gnb
+    //     std::string ip = "";
+    //     for(int i = 16;i;i++){
+    //         ip = ip + (char)buffer[i];
+    //     }
+    //     std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
+    //     // addSecGnb()
+    // }
 
     std::cout<<std::endl;
     if (size > 0)
