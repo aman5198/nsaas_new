@@ -89,10 +89,10 @@ void RlsUdpTask::onLoop()
             break;
         }
     }
+    std::cout<<"header match flag is "<<header_match<<std::endl;
     // 0 1 0 1 0 1 0 1 1 2 7 . 0 . 0 . 3 2 4 9 9 7 
     // 1 2 7 . 0 . 0 . 3 2 
     // 4 9 9 7 
-
     if(header_match){ // parse the packet to add secondary gnb
         std::string ip = "";
         for(int i = 16;i<36;i+=2){
