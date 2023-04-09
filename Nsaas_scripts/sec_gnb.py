@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import yaml
 from yaml.loader import SafeLoader
 import os
@@ -53,5 +53,3 @@ if __name__ == "__main__":
     secondIp = secondGnb.secondaryGnbConfigs()
     packet = secondGnb.createPacket(secondIp,'4997')
     secondGnb.sendReq(packet,primIp,primPort)
-=======
->>>>>>> parent of ef8506c (first version of script for sending secondary gnb cretion request.)
