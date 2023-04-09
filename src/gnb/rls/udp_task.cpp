@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <cstring>
 #include <set>
-#include <utils/sec_gnb.cpp>
+#include "../../utils/sec_gnb.cpp"
 
 #include <gnb/nts.hpp>
 #include <utils/common.hpp>
