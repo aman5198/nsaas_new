@@ -12,6 +12,8 @@
 #include <cstdint>
 #include <cstring>
 #include <set>
+#include <string>
+
 
 #include <gnb/nts.hpp>
 #include <utils/common.hpp>
@@ -98,7 +100,7 @@ void RlsUdpTask::onLoop()
             ip = ip + buffer[i];
         }
         std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
-        addSecGnb()
+        // addSecGnb()
     }
 
     std::cout<<std::endl;
