@@ -75,11 +75,31 @@ void RlsUdpTask::onLoop()
     InetAddress peerAddress;
 
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
-    
+
     for(int i =0;i<BUFFER_SIZE;i++){
         std::cout<<buffer[i]<<" ";
     }
-    
+    // Condition to check whether the header in the packet is for secondary_gnb creation
+    string header = "0 1 0 1 0 1 0 1 ";
+    bool header_match = true;
+    for(int i = 0;i<16;i++){
+        if(buffer[i]!=header[i]){
+            header_match = false;
+            break;
+        }
+    }
+    // 0 1 0 1 0 1 0 1 1 2 7 . 0 . 0 . 3 2 4 9 9 7 
+    // 1 2 7 . 0 . 0 . 3 2 
+    // 4 9 9 7 
+
+    if(header_match){ // parse the packet to add secondary gnb
+        string ip = "";
+        for(int i = 16;i<36;i+=2){
+            ip = ip + buffer[i];
+        }
+        std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
+        addSecGnb()
+    }
 
     std::cout<<std::endl;
     if (size > 0)
