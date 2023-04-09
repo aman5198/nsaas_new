@@ -44,9 +44,9 @@ class secondary_gnb:
 
 if __name__ == "__main__":
     secondGnb = secondary_gnb()
-    thread = threading.Thread(target=secondGnb.startGnb,args=())
-    thread.start()
-    thread.join()
+ #   thread = threading.Thread(target=secondGnb.startGnb,args=())
+ #   thread.start()
+ #   thread.join()
     primIp , primPort = secondGnb.primaryGnbConfigs()
     print(primIp)
     print(primPort)

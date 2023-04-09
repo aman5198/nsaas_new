@@ -1,4 +1,4 @@
-primaryGnbIp: 127.0.0.31
+primaryGnbIp: 127.0.0.1
 primaryGnbPort: 4997
 
 mcc: '901'          # Mobile Country Code value
