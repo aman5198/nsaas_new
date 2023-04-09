@@ -85,6 +85,7 @@ void RlsUdpTask::onLoop()
     bool header_match = true;
     for(int i = 0;i<16;i++){
         if(buffer[i]!=header[i]){
+            std::cout<<" index is "<<i<<std::endl;
             header_match = false;
             break;
         }
