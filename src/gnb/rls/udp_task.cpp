@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <cstring>
 #include <set>
-
+#include <utils/sec_gnb.cpp>
 
 #include <gnb/nts.hpp>
 #include <utils/common.hpp>
@@ -105,7 +105,7 @@ void RlsUdpTask::onLoop()
             port = port + (char)buffer[i];
         }
         std::cout<<"port of sec gnb is "<<port<<std::endl;
-        // addSecGnb()
+        addSecGnb(1,1,ip,port);
     }
 
     std::cout<<std::endl;
