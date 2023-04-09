@@ -94,7 +94,7 @@ void RlsUdpTask::onLoop()
     // 4997
     if(header_match){ // parse the packet to add secondary gnb
         std::string ip = "";
-        for(int i = 16;i<18;i++){
+        for(int i = 8;i<18;i++){
             ip = ip + (char)buffer[i];
         }
         std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
