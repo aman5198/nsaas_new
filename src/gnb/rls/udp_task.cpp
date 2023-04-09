@@ -85,23 +85,28 @@ void RlsUdpTask::onLoop()
     bool header_match = true;
     for(int i = 0;i<8;i++){
         if(buffer[i]!=header[i]){
-            std::cout<<" index is "<<i<<std::endl;
             header_match = false;
             break;
         }
     }
-    std::cout<<"header match flag is "<<header_match<<std::endl;
-    // 0 1 0 1 0 1 0 1 1 2 7 . 0 . 0 . 3 2 4 9 9 7 
-    // 1 2 7 . 0 . 0 . 3 2 
-    // 4 9 9 7 
-    // if(header_match){ // parse the packet to add secondary gnb
-    //     std::string ip = "";
-    //     for(int i = 16;i;i++){
-    //         ip = ip + (char)buffer[i];
-    //     }
-    //     std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
-    //     // addSecGnb()
-    // }
+    // 01010101127.0.0.324997
+    // 127.0.0.32 
+    // 4997
+    if(header_match){ // parse the packet to add secondary gnb
+        std::string ip = "";
+        for(int i = 16;i<18;i++){
+            ip = ip + (char)buffer[i];
+        }
+        std::cout<<"ip address of sec gnb is "<<ip<<std::endl;
+
+
+        std::string port = "";
+        for(int i = 18;i<22;i++){
+            port = port + (char)buffer[i];
+        }
+        std::cout<<"port of sec gnb is "<<port<<std::endl;
+        // addSecGnb()
+    }
 
     std::cout<<std::endl;
     if (size > 0)
