@@ -75,9 +75,13 @@ void RlsUdpTask::onLoop()
     InetAddress peerAddress;
 
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
-    for(int i =0;i<BUFFER_SIZE;i++){
-        std::cout<<buffer[i]<<" "<<;
+    if(BUFFER_SIZE!=0){
+        for(int i =0;i<BUFFER_SIZE;i++){
+            std::cout<<buffer[i]<<" "<<;
+        }
     }
+    
+
     std::cout<<std::endl;
     if (size > 0)
     {
