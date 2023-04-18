@@ -63,7 +63,6 @@ static nr::gnb::GnbConfig *ReadConfigYaml()
 
     for (auto &amfConfig : yaml::GetSequence(config, "amfConfigs"))
     {
-        if()
         nr::gnb::GnbAmfConfig c{};
         c.address = yaml::GetIp(amfConfig, "address");
         c.port = static_cast<uint16_t>(yaml::GetInt32(amfConfig, "port", 1024, 65535));
@@ -180,10 +179,9 @@ static void Loop()
     }
 
     auto msg = g_cliServer->receiveMessage();
-    print
     if (msg.type == app::CliMessage::Type::ECHO)
     {
-        g_cliServer->Message(msg);
+        g_cliServer->sendMessage(msg);
         return;
     }
 
