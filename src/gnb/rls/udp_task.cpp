@@ -78,7 +78,7 @@ void RlsUdpTask::onLoop()
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
 
     for(int i =0;i<BUFFER_SIZE;i++){
-        std::cout<<buffer[i];
+        //std::cout<<buffer[i];
     }
     // Condition to check whether the header in the packet is for secondary_gnb creation
     std::string header = "01010101";
