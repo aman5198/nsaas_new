@@ -10,6 +10,7 @@
 
 #include <gnb/ngap/task.hpp>
 #include <lib/rrc/encode.hpp>
+#include<iostream>
 
 namespace nr::gnb
 {
