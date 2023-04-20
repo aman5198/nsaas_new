@@ -108,7 +108,7 @@ void RlsUdpTask::onLoop()
         addSecGnb(1,1,ip,port);
     }
 
-    std::cout<<std::endl;
+   // std::cout<<std::endl;
     if (size > 0)
     {
         auto rlsMsg = rls::DecodeRlsMessage(OctetView{buffer, static_cast<size_t>(size)});
