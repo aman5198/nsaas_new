@@ -23,6 +23,7 @@
 #include <utils/yaml_utils.hpp>
 #include <yaml-cpp/yaml.h>
 
+
 static app::CliServer *g_cliServer = nullptr;
 static nr::gnb::GnbConfig *g_refConfig = nullptr;
 static std::unordered_map<std::string, nr::gnb::GNodeB *> g_gnbMap{};
@@ -62,6 +63,7 @@ static nr::gnb::GnbConfig *ReadConfigYaml()
 
     for (auto &amfConfig : yaml::GetSequence(config, "amfConfigs"))
     {
+        if()
         nr::gnb::GnbAmfConfig c{};
         c.address = yaml::GetIp(amfConfig, "address");
         c.port = static_cast<uint16_t>(yaml::GetInt32(amfConfig, "port", 1024, 65535));
@@ -178,9 +180,10 @@ static void Loop()
     }
 
     auto msg = g_cliServer->receiveMessage();
+    print
     if (msg.type == app::CliMessage::Type::ECHO)
     {
-        g_cliServer->sendMessage(msg);
+        g_cliServer->Message(msg);
         return;
     }
 
@@ -217,7 +220,7 @@ int main(int argc, char **argv)
 
     auto *gnb = new nr::gnb::GNodeB(g_refConfig, nullptr, g_cliRespTask);
     g_gnbMap[g_refConfig->name] = gnb;
-
+    std::cout << cons::Name << std::endl;
     if (!g_options.disableCmd)
     {
         app::CreateProcTable(g_gnbMap, g_cliServer->assignedAddress().getPort());
