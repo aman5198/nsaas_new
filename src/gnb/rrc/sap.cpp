@@ -41,7 +41,6 @@ void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
         break;
     }
         
-    }
     case NmGnbRlsToRrc::UPLINK_RRC: {
         handleUplinkRrc(msg.ueId, msg.rrcChannel, msg.data);
         break;
