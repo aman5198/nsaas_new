@@ -1,4 +1,5 @@
 #include "utils/network.hpp"
+#include <gnb/app/task.hpp>
 // #include<map>
 // #include<pair>
 // #include<iostream>
@@ -16,4 +17,12 @@ void addSecGnb(int primary_gnb_id, int secondary_gnb_id, std::string sec_ip, std
 
     // primary_gnb_ue_list[primary_gnb_id] = sec_data;
 
+    Json json = Json::Arr({});
+    json.push(Json::Obj({
+        {"ue-id", secondary_gnb_id},
+        {"ran-ngap-id", 1},
+        {"amf-ngap-id", 1},
+    }));
+    InetAddress addr(sec_ip, sec_port);
+    sendResult(addr, json.dumpYaml());
 }
