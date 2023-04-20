@@ -121,6 +121,7 @@ static void ReadOptions(int argc, char **argv)
 
 static void ReceiveCommand(app::CliMessage &msg)
 {
+    std::cout << msg.value << std::endl;
     if (msg.value.empty())
     {
         g_cliServer->sendMessage(app::CliMessage::Result(msg.clientAddr, ""));
@@ -218,7 +219,6 @@ int main(int argc, char **argv)
 
     auto *gnb = new nr::gnb::GNodeB(g_refConfig, nullptr, g_cliRespTask);
     g_gnbMap[g_refConfig->name] = gnb;
-    std::cout << cons::Name << std::endl;
     if (!g_options.disableCmd)
     {
         app::CreateProcTable(g_gnbMap, g_cliServer->assignedAddress().getPort());
