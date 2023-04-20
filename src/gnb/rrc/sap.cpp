@@ -11,7 +11,11 @@
 #include <gnb/ngap/task.hpp>
 #include <lib/rrc/encode.hpp>
 #include<iostream>
-#include<socket.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
 
 namespace nr::gnb
 {
@@ -27,8 +31,11 @@ void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
         int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
         struct sockaddr_in m_serverAddr;
         m_serverAddr.sin_family = AF_INET;
-        m_serverAddr.sin_port = htons(8080);
-        sendto(m_socket, msg.c_str(), msg.length(), 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
+        m_serverAddr.sin_port = htons(4997);
+        m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+        s_len = sizeof(servaddr);
+        sendto(m_socket, msg.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
+        std::cout <<"[Custom thread] Message was sent"
     }
         std::cout << "msg.data.data: " << msg.data.data() << std::endl;
         triggerSysInfoBroadcast();
