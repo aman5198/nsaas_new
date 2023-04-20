@@ -17,7 +17,7 @@ namespace nr::gnb
 
 void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
 {
-    std::cout<<"sap.cpp: "<<msg.data.getI(0)<<"\n";
+    std::cout << "msg.data.data: " << msg.data.data() << std::endl;
     switch (msg.present)
     {
     case NmGnbRlsToRrc::SIGNAL_DETECTED: {
