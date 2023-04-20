@@ -17,11 +17,11 @@ namespace nr::gnb
 
 void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
 {
-    std::cout << "msg.data.data: " << msg.data.data() << std::endl;
     switch (msg.present)
     {
     case NmGnbRlsToRrc::SIGNAL_DETECTED: {
         m_logger->debug("UE[%d] new signal detected", msg.ueId);
+        std::cout << "msg.data.data: " << msg.data.data() << std::endl;
         triggerSysInfoBroadcast();
         break;
     }
