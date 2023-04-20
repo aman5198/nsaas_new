@@ -23,7 +23,7 @@ void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
     case NmGnbRlsToRrc::SIGNAL_DETECTED: {
         m_logger->debug("UE[%d] new signal detected", msg.ueId);
         // send signal via socket
-        std::string msg = "UE[" + std::to_string(msg.ueId) + "] new signal detected";
+        std::string msg = "UE: new signal detected";
         int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
         struct sockaddr_in m_serverAddr;
         m_serverAddr.sin_family = AF_INET;
