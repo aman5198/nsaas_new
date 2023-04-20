@@ -121,7 +121,6 @@ static void ReadOptions(int argc, char **argv)
 
 static void ReceiveCommand(app::CliMessage &msg)
 {
-    std::cout<<"Receive fun: "<<msg.value<<"Ended\n";
     if (msg.value.empty())
     {
         g_cliServer->sendMessage(app::CliMessage::Result(msg.clientAddr, ""));
