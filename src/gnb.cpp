@@ -173,7 +173,6 @@ static void ReceiveCommand(app::CliMessage &msg)
 
 static void Loop()
 {
-    std::cout<<"Loop fun: "<<msg.value<<"Ended\n";
     if (!g_cliServer)
     {
         ::pause();
