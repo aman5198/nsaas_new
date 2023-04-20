@@ -179,7 +179,7 @@ static void Loop()
     }
 
     auto msg = g_cliServer->receiveMessage();
-    std::cout<<"Loop fun: "<<msg.value<<std::endl;
+    std::cout<<"Loop fun: "<<msg.value<<"Ended\n";
     if (msg.type == app::CliMessage::Type::ECHO)
     {
         g_cliServer->sendMessage(msg);
