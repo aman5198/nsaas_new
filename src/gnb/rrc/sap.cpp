@@ -24,6 +24,10 @@ void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
         m_logger->debug("UE[%d] new signal detected", msg.ueId);
         // send signal via socket
         std::string msg = "UE[" + std::to_string(msg.ueId) + "] new signal detected";
+        int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
+        struct sockaddr_in m_serverAddr;
+        m_serverAddr.sin_family = AF_INET;
+        m_serverAddr.sin_port = htons(8080);
         sendto(m_socket, msg.c_str(), msg.length(), 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
     }
         std::cout << "msg.data.data: " << msg.data.data() << std::endl;
