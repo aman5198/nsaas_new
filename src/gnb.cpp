@@ -121,6 +121,7 @@ static void ReadOptions(int argc, char **argv)
 
 static void ReceiveCommand(app::CliMessage &msg)
 {
+    std::cout<<"Receive fun: "<<msg.value<<"Ended\n";
     if (msg.value.empty())
     {
         g_cliServer->sendMessage(app::CliMessage::Result(msg.clientAddr, ""));
@@ -172,6 +173,7 @@ static void ReceiveCommand(app::CliMessage &msg)
 
 static void Loop()
 {
+    std::cout<<"Loop fun: "<<msg.value<<"Ended\n";
     if (!g_cliServer)
     {
         ::pause();
@@ -179,7 +181,6 @@ static void Loop()
     }
 
     auto msg = g_cliServer->receiveMessage();
-    std::cout<<"Loop fun: "<<msg.value<<"Ended\n";
     if (msg.type == app::CliMessage::Type::ECHO)
     {
         g_cliServer->sendMessage(msg);
