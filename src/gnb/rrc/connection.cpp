@@ -10,7 +10,7 @@
 
 #include <gnb/ngap/task.hpp>
 #include <lib/rrc/encode.hpp>
-
+#include<iostream>
 #include <asn/ngap/ASN_NGAP_FiveG-S-TMSI.h>
 #include <asn/rrc/ASN_RRC_BCCH-BCH-Message.h>
 #include <asn/rrc/ASN_RRC_BCCH-DL-SCH-Message.h>
@@ -87,7 +87,8 @@ void GnbRrcTask::receiveRrcSetupRequest(int ueId, const ASN_RRC_RRCSetupRequest 
                         rrc::encode::EncodeS(asn_DEF_ASN_RRC_CellGroupConfig, &masterCellGroup));
 
     m_logger->info("RRC Setup for UE[%d]", ueId);
-
+    std::cout << ueId << std::endl;
+    std::cout << pdu << std::endl;
     sendRrcMessage(ueId, pdu);
     asn::Free(asn_DEF_ASN_RRC_DL_CCCH_Message, pdu);
 }
