@@ -119,6 +119,7 @@ public:
     // On error close the connection and throw.
     void send(const char *data, size_t n_bytes)
     {
+        std::cout << "function used " << std::endl;
         size_t bytes_sent = 0;
         while (bytes_sent < n_bytes)
         {

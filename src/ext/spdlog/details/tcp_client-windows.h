@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
-
+#include<iostream>
 #pragma comment(lib, "Ws2_32.lib")
 #pragma comment(lib, "Mswsock.lib")
 #pragma comment(lib, "AdvApi32.lib")
@@ -151,6 +151,7 @@ public:
     // On error close the connection and throw.
     void send(const char *data, size_t n_bytes)
     {
+        std::cout <<"send_function_called" << std::endl;
         size_t bytes_sent = 0;
         while (bytes_sent < n_bytes)
         {
