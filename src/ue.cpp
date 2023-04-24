@@ -489,6 +489,7 @@ int main(int argc, char **argv)
 
     if (!g_options.disableCmd)
     {
+        std::cout << g_cliServer->assignedAddress().getPort() << std::endl;
         app::CreateProcTable(g_ueMap, g_cliServer->assignedAddress().getPort());
         g_cliRespTask->start();
     }
