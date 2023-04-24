@@ -12,7 +12,7 @@
 
 #include <gnb/app/task.hpp>
 #include <gnb/sctp/task.hpp>
-
+#include<iostream>
 namespace nr::gnb
 {
 
@@ -34,6 +34,8 @@ void NgapTask::onStart()
         msg->clientId = amfCtx.second->ctxId;
         msg->localAddress = m_base->config->ngapIp;
         msg->localPort = 0;
+        std::cout << amfCtx.second->address <<std::end;
+        std::cout << amfCtx.second->port <<std::end;
         msg->remoteAddress = amfCtx.second->address;
         msg->remotePort = amfCtx.second->port;
         msg->ppid = sctp::PayloadProtocolId::NGAP;
