@@ -214,10 +214,11 @@ void GtpTask::handleUplinkData(int ueId, int psi, OctetString &&pdu)
         OctetString gtpPdu;
         if (!gtp::EncodeGtpMessage(gtp, gtpPdu))
             m_logger->err("Uplink data failure, GTP encoding failed");
-        else
+        else{
             std::cout <<  pduSession->upTunnel.address << std::endl;
             std:: cout << cons::GtpPort << std::endl;
             m_udpServer->send(InetAddress(pduSession->upTunnel.address, cons::GtpPort), gtpPdu);
+        }
     }
 }
 
