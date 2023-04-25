@@ -115,9 +115,9 @@ void RlsUdpTask::onLoop()
         std::cout<<"port of sec gnb is "<<port<<std::endl;
         addSecGnb(1,1,ip,port);
     }
-    auto &w = dynamic_cast<NmGnbRrcToNgap &>(*msg);
-    w.ueId = 1;
-    handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
+    // auto &w = dynamic_cast<NmGnbRrcToNgap &>(*msg);
+    // w.ueId = 1;
+    // handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
    // std::cout<<std::endl;
     if (size > 0)
     {
