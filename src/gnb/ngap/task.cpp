@@ -57,10 +57,10 @@ void NgapTask::onLoop()
         switch (w.present)
         {
         case NmGnbRrcToNgap::INITIAL_NAS_DELIVERY: {
-            std::cout << type(w.ueId) << std::endl;
-            std::cout << type(w.pdu) << std::endl;
-            std::cout << type(w.rrcEstablishmentCause) << std::endl;
-            std::cout << type(w.sTmsi) << std::endl;
+            std::cout << typeid(w.ueId).name() << std::endl;
+            std::cout << typeid(w.pdu).name() << std::endl;
+            std::cout << typeid(w.rrcEstablishmentCause).name() << std::endl;
+            std::cout << typeid(w.sTmsi).name() << std::endl;
             handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
 
             break;
