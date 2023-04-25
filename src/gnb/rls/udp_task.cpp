@@ -100,25 +100,25 @@ void RlsUdpTask::onLoop()
     std::cout<<"w.rrcEstablishmentCause is "<<rrcEstablishmentCause<<std::endl;
 
 
-    FILE* infileOctet;
+ //   FILE* infileOctet;
     
-        // Open person.dat for reading
-    infileOctet = fopen("logsOctet.bin", "wb+");
-    if (infileOctet == NULL) {
-        fprintf(stderr, "\nError opening file\n");
-        exit(1);
-    }
+    //     // Open person.dat for reading
+    // infileOctet = fopen("logsOctet.bin", "wb+");
+    // if (infileOctet == NULL) {
+    //     fprintf(stderr, "\nError opening file\n");
+    //     exit(1);
+    // }
 
-        const struct  OctetString pdu;
+    //     const struct  OctetString pdu;
     
-        // setting pointer to start of the file
-        rewind(infileOctet);
+    //     // setting pointer to start of the file
+    //     rewind(infileOctet);
     
-        // reading to read_struct
-        fread(&pdu, sizeof(pdu), 1, infileOctet);
+    //     // reading to read_struct
+    //     fread(&pdu, sizeof(pdu), 1, infileOctet);
 
-        // close file
-        fclose(infileOctet);
+    //     // close file
+    //     fclose(infileOctet);
         // printf("%d\n", temp.value);
 
 
