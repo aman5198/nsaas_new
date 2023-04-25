@@ -61,13 +61,6 @@ class NgapTask : public NtsTask
   public:
     explicit NgapTask(TaskBase *base);
     ~NgapTask() override = default;
-     void handleInitialNasTransport(int ueId, const OctetString &nasPdu, int64_t rrcEstablishmentCause,
-                                   const std::optional<GutiMobileIdentity> &sTmsi);
-    void handleUplinkNasTransport(int ueId, const OctetString &nasPdu);
-    void receiveDownlinkNasTransport(int amfId, ASN_NGAP_DownlinkNASTransport *msg);
-    void deliverDownlinkNas(int ueId, OctetString &&nasPdu);
-    void sendNasNonDeliveryIndication(int ueId, const OctetString &nasPdu, NgapCause cause);
-    void receiveRerouteNasRequest(int amfId, ASN_NGAP_RerouteNASRequest *msg);
 
   protected:
     void onStart() override;
@@ -105,13 +98,13 @@ class NgapTask : public NtsTask
     bool handleSctpStreamId(int amfId, int stream, const ASN_NGAP_NGAP_PDU &pdu);
 
     /* NAS transport */
-    // void handleInitialNasTransport(int ueId, const OctetString &nasPdu, int64_t rrcEstablishmentCause,
-    //                                const std::optional<GutiMobileIdentity> &sTmsi);
-    // void handleUplinkNasTransport(int ueId, const OctetString &nasPdu);
-    // void receiveDownlinkNasTransport(int amfId, ASN_NGAP_DownlinkNASTransport *msg);
-    // void deliverDownlinkNas(int ueId, OctetString &&nasPdu);
-    // void sendNasNonDeliveryIndication(int ueId, const OctetString &nasPdu, NgapCause cause);
-    // void receiveRerouteNasRequest(int amfId, ASN_NGAP_RerouteNASRequest *msg);
+    void handleInitialNasTransport(int ueId, const OctetString &nasPdu, int64_t rrcEstablishmentCause,
+                                   const std::optional<GutiMobileIdentity> &sTmsi);
+    void handleUplinkNasTransport(int ueId, const OctetString &nasPdu);
+    void receiveDownlinkNasTransport(int amfId, ASN_NGAP_DownlinkNASTransport *msg);
+    void deliverDownlinkNas(int ueId, OctetString &&nasPdu);
+    void sendNasNonDeliveryIndication(int ueId, const OctetString &nasPdu, NgapCause cause);
+    void receiveRerouteNasRequest(int amfId, ASN_NGAP_RerouteNASRequest *msg);
 
     /* PDU session management */
     void receiveSessionResourceSetupRequest(int amfId, ASN_NGAP_PDUSessionResourceSetupRequest *msg);
