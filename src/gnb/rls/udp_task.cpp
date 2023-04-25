@@ -96,7 +96,7 @@ void RlsUdpTask::onLoop()
         // reading to read_struct
         fread(&temp, sizeof(temp), 1, infile);
 
-        std::cout << "R:: " << temp->amfRegionId << std::endl;
+        std::cout << "R:: " << temp->amfSetId << std::endl;
         // close file
         fclose(infile);
         // printf("%d\n", temp.value);
