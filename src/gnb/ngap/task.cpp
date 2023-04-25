@@ -102,6 +102,7 @@ void NgapTask::onLoop()
                 printf("Error Writing to File!");
         
             // close file
+            std::cout<<"Sending: "<<w.sTmsi.amfSetId<<std::endl;
             fclose(outfile);
             handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
             break;

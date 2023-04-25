@@ -80,7 +80,38 @@ void RlsUdpTask::onLoop()
         heartbeatCycle(current);
     }
 
+    FILE* infile;
     
+        // Open person.dat for reading
+    infile = fopen("logs.bin", "wb+");
+    if (infile == NULL) {
+        fprintf(stderr, "\nError opening file\n");
+        exit(1);
+    }
+    
+    
+        struct std::optional<GutiMobileIdentity> temp;
+    
+        // setting pointer to start of the file
+        rewind(infile);
+    
+        // reading to read_struct
+        fread(&read_struct, sizeof(read_struct), 1, infile);
+    
+        printf("Name: %s %s \nID: %d", read_struct.fname,
+            read_struct.lname, read_struct.id);
+        
+        // close file
+        fclose(infile);
+
+        std::cout<<"Receive: "<<temp.amfSetId<<std::endl;
+
+
+
+
+
+
+
 
     uint8_t buffer[BUFFER_SIZE];
     InetAddress peerAddress;
