@@ -82,10 +82,10 @@ void RlsUdpTask::onLoop()
     }
 
     int ueID, pdu;
-    int64_t w.rrcEstablishmentCause;
+    int64_t rrcEstablishmentCause;
 
     std::fstream newfile;
-    newfile.open("tpoint.txt",ios::in); 
+    newfile.open("tpoint.txt",std::ios::in); 
     if (newfile.is_open()){ 
 
         // assign first value as integer to ueID
@@ -93,14 +93,14 @@ void RlsUdpTask::onLoop()
         // assign second value as integer to pdu
         newfile >> pdu;
         // assign third value as integer to w.rrcEstablishmentCause
-        newfile >> w.rrcEstablishmentCause;
+        newfile >> rrcEstablishmentCause;
         // close the file
         newfile.close();
 
     }
     std::cout<<"ueID is "<<ueID<<std::endl;
     std::cout<<"pdu is "<<pdu<<std::endl;
-    std::cout<<"w.rrcEstablishmentCause is "<<w.rrcEstablishmentCause<<std::endl;
+    std::cout<<"w.rrcEstablishmentCause is "<<rrcEstablishmentCause<<std::endl;
 
 
 

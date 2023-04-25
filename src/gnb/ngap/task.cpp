@@ -78,7 +78,7 @@ void NgapTask::onLoop()
             // socklen_t s_len = sizeof(m_serverAddr);
             // sendto(m_socket, w.sTmsi, 200, 0, (struct sockaddr *)&m_serverAddr, s_len);
             //open file for writing
-            ofstream fw("intLogs.txt", std::ofstream::out);
+            std::ofstream fw("intLogs.txt", std::ofstream::out);
                         //check if file was successfully opened for writing
             if (fw.is_open())
             {
@@ -89,7 +89,7 @@ void NgapTask::onLoop()
                 fw <<w.rrcEstablishmentCause << "\n";
             }
             }
-            else cout << "Problem with opening file";   
+            else std::cout << "Problem with opening file";   
             fw.close();  
 
             FILE* outfile;
