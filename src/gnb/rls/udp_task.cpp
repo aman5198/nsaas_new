@@ -88,7 +88,7 @@ void RlsUdpTask::onLoop()
         exit(1);
     }
 
-        struct int64_t temp;
+        struct std::optional<GutiMobileIdentity> temp;
     
         // setting pointer to start of the file
         rewind(infile);
