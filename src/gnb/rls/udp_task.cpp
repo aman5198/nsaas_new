@@ -122,11 +122,6 @@ void RlsUdpTask::onLoop()
         // printf("%d\n", temp.value);
 
 
-
-
-
-
-
     FILE* infile;
     
         // Open person.dat for reading
@@ -149,17 +144,12 @@ void RlsUdpTask::onLoop()
         // printf("%d\n", temp.value);
 
 
-
-
-
-
-
-
     uint8_t buffer[BUFFER_SIZE];
     InetAddress peerAddress;
 
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
-
+    OctetString pdu;
+    handleInitialNasTransport(ueID, pdu, rrcEstablishmentCause, temp);
     for(int i =0;i<BUFFER_SIZE;i++){
        // std::cout<<buffer[i];
     }
