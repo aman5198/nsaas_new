@@ -20,6 +20,10 @@
 #include <asn/ngap/ASN_NGAP_ProtocolIE-Field.h>
 #include <asn/ngap/ASN_NGAP_RerouteNASRequest.h>
 #include <asn/ngap/ASN_NGAP_UplinkNASTransport.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
 
 namespace nr::gnb
 {
@@ -28,6 +32,17 @@ void NgapTask::handleInitialNasTransport(int ueId, const OctetString &nasPdu, in
                                          const std::optional<GutiMobileIdentity> &sTmsi)
 {
     m_logger->debug("Initial NAS message received from UE[%d]", ueId);
+    std::string msg = "Initial NAS message received";
+    int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in m_serverAddr;
+    m_serverAddr.sin_family = AF_INET;
+    m_serverAddr.sin_port = htons(4997);
+    m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    socklen_t s_len = sizeof(m_serverAddr);
+    sendto(m_socket, msg.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
+    m_logger->debug("Custom thread Message was sent - 3");    
+
+
 
     if (m_ueCtx.count(ueId))
     {
