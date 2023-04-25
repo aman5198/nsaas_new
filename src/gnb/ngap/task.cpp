@@ -77,20 +77,27 @@ void NgapTask::onLoop()
             // m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
             // socklen_t s_len = sizeof(m_serverAddr);
             // sendto(m_socket, w.sTmsi, 200, 0, (struct sockaddr *)&m_serverAddr, s_len);
-            //open file for writing
-            std::ofstream fw("intLogs.txt", std::ofstream::out);
+
+
+
+
+
+            // //create an array of 5 integers
+
+
+            newfile.open("inlogs.txt",ios::out);
+            // //check if file was successfully opened for writing
                         //check if file was successfully opened for writing
-            if (fw.is_open())
+            if (newfile.is_open())
             {
-            //store array contents to text file
-            for (int i = 0; i < arraySize; i++) {
-                fw << w.ueId << "\n";
-                fw <<w.pdu << "\n";
-                fw <<w.rrcEstablishmentCause << "\n";
-            }
+                newfile << w.ueId << "\n";
+                newfile <<w.pdu << "\n";
+                newfile <<w.rrcEstablishmentCause << "\n";
+                newfile.close(); //close the file
             }
             else std::cout << "Problem with opening file";   
-            fw.close();  
+             
+
 
             FILE* outfile;
   
