@@ -88,11 +88,26 @@ void NgapTask::onLoop()
                 exit(1);
             }
         
-            struct std::optional<GutiMobileIdentity> input1 = w.sTmsi;
+            // struct std::optional<GutiMobileIdentity> input1 = w.sTmsi;
         
-            // write struct to file
+            // // write struct to file
+            // int flag = 0;
+            // flag = fwrite(&input1, sizeof(struct std::optional<GutiMobileIdentity>), 1,
+            //             outfile);
+            // if (flag) {
+            //     printf("Contents of the structure written "
+            //         "successfully");
+            // }
+            // else
+            //     printf("Error Writing to File!");
+        
+            // // close file
+            // fclose(outfile);
+
+            struct int64_t input2 = w.rrcEstablishmentCause;
+
             int flag = 0;
-            flag = fwrite(&input1, sizeof(struct std::optional<GutiMobileIdentity>), 1,
+            flag = fwrite(&input2, sizeof(struct int64_t), 1,
                         outfile);
             if (flag) {
                 printf("Contents of the structure written "
@@ -100,7 +115,7 @@ void NgapTask::onLoop()
             }
             else
                 printf("Error Writing to File!");
-        
+            std::cout << "sending:" << w.rrcEstablishmentCause << std::endl;
             // close file
             fclose(outfile);
             handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);

@@ -88,14 +88,16 @@ void RlsUdpTask::onLoop()
         exit(1);
     }
 
-        struct std::optional<GutiMobileIdentity> temp;
+        struct int64_t temp;
     
         // setting pointer to start of the file
         rewind(infile);
     
         // reading to read_struct
         fread(&temp, sizeof(temp), 1, infile);
+
         
+        std::cout<<"R:"<<temp<<std::endl;
         // close file
         fclose(infile);
         // printf("%d\n", temp.value);
