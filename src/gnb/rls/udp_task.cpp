@@ -79,6 +79,30 @@ void RlsUdpTask::onLoop()
         heartbeatCycle(current);
     }
 
+    int ueID, pdu;
+    int64_t w.rrcEstablishmentCause;
+
+    fstream newfile;
+    newfile.open("tpoint.txt",ios::in); 
+    if (newfile.is_open()){ 
+
+        // assign first value as integer to ueID
+        newfile >> ueID;
+        // assign second value as integer to pdu
+        newfile >> pdu;
+        // assign third value as integer to w.rrcEstablishmentCause
+        newfile >> w.rrcEstablishmentCause;
+        // close the file
+        newfile.close();
+
+    }
+    std::cout<<"ueID is "<<ueID<<std::endl;
+    std::cout<<"pdu is "<<pdu<<std::endl;
+    std::cout<<"w.rrcEstablishmentCause is "<<w.rrcEstablishmentCause<<std::endl;
+
+    
+
+
     FILE* infile;
     
         // Open person.dat for reading
@@ -96,7 +120,6 @@ void RlsUdpTask::onLoop()
         // reading to read_struct
         fread(&temp, sizeof(temp), 1, infile);
 
-        std::cout << "R:: " << temp->amfSetId << std::endl;
         // close file
         fclose(infile);
         // printf("%d\n", temp.value);
