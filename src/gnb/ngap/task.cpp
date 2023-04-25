@@ -54,8 +54,6 @@ void NgapTask::onStart()
 void NgapTask::onLoop()
 {
     auto msg = take();
-    msg->msgType
- 
     
     if (!msg)
         return;
