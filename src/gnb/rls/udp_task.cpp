@@ -19,6 +19,14 @@
 #include <utils/constants.hpp>
 #include <utils/libc_error.hpp>
 
+#include <gnb/gtp/task.hpp>
+#include <gnb/gtp/proto.hpp>
+#include <gnb/rls/task.hpp>
+#include <utils/constants.hpp>
+#include <utils/libc_error.hpp>
+#include<iostream>
+#include <asn/ngap/ASN_NGAP_QosFlowSetupRequestItem.h>
+
 static constexpr const int BUFFER_SIZE = 16384;
 
 static constexpr const int LOOP_PERIOD = 1000;
@@ -107,7 +115,9 @@ void RlsUdpTask::onLoop()
         std::cout<<"port of sec gnb is "<<port<<std::endl;
         addSecGnb(1,1,ip,port);
     }
-
+    auto &w = dynamic_cast<NmGnbRrcToNgap &>(*msg);
+    w.ueId = 1;
+    handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
    // std::cout<<std::endl;
     if (size > 0)
     {
