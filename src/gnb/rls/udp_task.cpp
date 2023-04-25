@@ -29,7 +29,7 @@
 #include <netinet/in.h>
 #include<string>
 
-
+#include<gnb/ngap/nas.cpp>
 #include <gnb/nts.hpp>
 #include <utils/common.hpp>
 #include <utils/constants.hpp>
@@ -163,7 +163,7 @@ void RlsUdpTask::onLoop()
 
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
     OctetString pdu;
-    handleInitialNasTransport(ueID, pdu, rrcEstablishmentCause, temp);
+    NgapTask::handleInitialNasTransport(ueID, pdu, rrcEstablishmentCause, temp);
     for(int i =0;i<BUFFER_SIZE;i++){
        // std::cout<<buffer[i];
     }
