@@ -85,6 +85,7 @@ void UeRrcTask::startConnectionEstablishment(OctetString &&nasPdu)
 
     /* Send the message */
     m_logger->debug("Sending RRC Setup Request");
+    
     m_logger->debug("Custom thread Message was sent");  
     std::string msg = "Sending RRC Setup Request";
     int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
