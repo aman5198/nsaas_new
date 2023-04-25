@@ -42,8 +42,8 @@ void NgapTask::onStart()
         msg->clientId = amfCtx.second->ctxId;
         msg->localAddress = m_base->config->ngapIp;
         msg->localPort = 0;
-        std::cout << amfCtx.second->address <<std::endl;
-        std::cout << amfCtx.second->port <<std::endl;
+       // std::cout << amfCtx.second->address <<std::endl;
+       // std::cout << amfCtx.second->port <<std::endl;
         msg->remoteAddress = amfCtx.second->address;
         msg->remotePort = amfCtx.second->port;
         msg->ppid = sctp::PayloadProtocolId::NGAP;
@@ -123,23 +123,6 @@ void NgapTask::onLoop()
 
         //     // close file
         //     fclose(outfileOctet);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             FILE* outfile;
   
             // open file for writing

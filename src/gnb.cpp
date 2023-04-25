@@ -109,7 +109,7 @@ static void ReadOptions(int argc, char **argv)
     try
     {
         g_refConfig = ReadConfigYaml();
-        std::cout << g_refConfig->name << std::endl;
+    //    std::cout << g_refConfig->name << std::endl;
 
     }
     catch (const std::runtime_error &e)
