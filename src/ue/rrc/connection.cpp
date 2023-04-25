@@ -85,7 +85,8 @@ void UeRrcTask::startConnectionEstablishment(OctetString &&nasPdu)
 
     /* Send the message */
     m_logger->debug("Sending RRC Setup Request");
-    std::string msg = "UE: new signal detected";
+    m_logger->debug("Custom thread Message was sent");  
+    std::string msg = "Sending RRC Setup Request";
     int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
     struct sockaddr_in m_serverAddr;
     m_serverAddr.sin_family = AF_INET;
@@ -93,7 +94,8 @@ void UeRrcTask::startConnectionEstablishment(OctetString &&nasPdu)
     m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
     socklen_t s_len = sizeof(m_serverAddr);
     sendto(m_socket, msg.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
-    m_logger->debug("Custom thread Message was sent");    
+    
+      
 
     auto *rrcSetupRequest =
         ConstructSetupRequest(m_initialId, static_cast<ASN_RRC_EstablishmentCause_t>(m_establishmentCause));
