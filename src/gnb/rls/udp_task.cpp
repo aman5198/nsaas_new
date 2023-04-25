@@ -96,10 +96,10 @@ void RlsUdpTask::onLoop()
         rewind(infile);
     
         // reading to read_struct
-        fread(&read_struct, sizeof(read_struct), 1, infile);
+        fread(&temp, sizeof(temp), 1, infile);
     
-        printf("Name: %s %s \nID: %d", read_struct.fname,
-            read_struct.lname, read_struct.id);
+        printf("Name: %s %s \nID: %d", temp.fname,
+            temp.lname, temp.id);
         
         // close file
         fclose(infile);
