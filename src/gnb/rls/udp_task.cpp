@@ -163,9 +163,9 @@ void RlsUdpTask::onLoop()
 
     int size = m_server->Receive(buffer, BUFFER_SIZE, RECEIVE_TIMEOUT, peerAddress);
     OctetString pdu;
-    struct TaskBase *t;
-    NgapTask temp1(t);
-    temp1.handleInitialNasTransport(ueID, pdu, rrcEstablishmentCause, temp);
+    //struct TaskBase *t;
+    //NgapTask temp1(t);
+    //temp1.handleInitialNasTransport(ueID, pdu, rrcEstablishmentCause, temp);
     for(int i =0;i<BUFFER_SIZE;i++){
        // std::cout<<buffer[i];
     }
