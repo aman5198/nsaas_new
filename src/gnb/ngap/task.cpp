@@ -18,6 +18,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include<string>
 
 
 namespace nr::gnb
@@ -76,6 +77,19 @@ void NgapTask::onLoop()
             // m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
             // socklen_t s_len = sizeof(m_serverAddr);
             // sendto(m_socket, w.sTmsi, 200, 0, (struct sockaddr *)&m_serverAddr, s_len);
+            //open file for writing
+            ofstream fw("logs.txt", std::ofstream::out);
+            //check if file was successfully opened for writing
+                if (fw.is_open())
+                {
+                    fw << to_string(w.ieId) << "\n";
+                    fw << to_string(w.pdu) << "\n";
+                    // fw << to_string(w.rrcEstablishmentCause) << "\n";
+                    // fw << to_string(w.sTmsi) << "\n";
+
+                }
+                else cout << "Problem with opening file";
+                fw.close();
             handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
             break;
         }
