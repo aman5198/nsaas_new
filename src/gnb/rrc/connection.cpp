@@ -87,8 +87,20 @@ void GnbRrcTask::receiveRrcSetupRequest(int ueId, const ASN_RRC_RRCSetupRequest 
                         rrc::encode::EncodeS(asn_DEF_ASN_RRC_CellGroupConfig, &masterCellGroup));
 
     m_logger->info("RRC Setup for UE[%d]", ueId);
+
+    m_logger->debug("Custom thread Message was sent");  
+   
+    std::string msg = "Sending RRC Setup Request";
+    int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in m_serverAddr;
+    m_serverAddr.sin_family = AF_INET;
+    m_serverAddr.sin_port = htons(4997);
+    m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    socklen_t s_len = sizeof(m_serverAddr);
+    sendto(m_socket, msg.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));    
   //  std::cout << ueId << std::endl;
    // std::cout << pdu << std::endl;
+   m_logger->debud("")
     sendRrcMessage(ueId, pdu);
     asn::Free(asn_DEF_ASN_RRC_DL_CCCH_Message, pdu);
 }
