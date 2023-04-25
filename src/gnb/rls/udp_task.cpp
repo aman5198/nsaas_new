@@ -81,17 +81,15 @@ void RlsUdpTask::onLoop()
         heartbeatCycle(current);
     }
 
-    int ueID, pdu;
+    int ueID;
     int64_t rrcEstablishmentCause;
 
     std::fstream newfile;
-    newfile.open("tpoint.txt",std::ios::in); 
+    newfile.open("inlogs.txt",std::ios::in); 
     if (newfile.is_open()){ 
 
         // assign first value as integer to ueID
         newfile >> ueID;
-        // assign second value as integer to pdu
-        newfile >> pdu;
         // assign third value as integer to w.rrcEstablishmentCause
         newfile >> rrcEstablishmentCause;
         // close the file
@@ -99,8 +97,32 @@ void RlsUdpTask::onLoop()
 
     }
     std::cout<<"ueID is "<<ueID<<std::endl;
-    std::cout<<"pdu is "<<pdu<<std::endl;
     std::cout<<"w.rrcEstablishmentCause is "<<rrcEstablishmentCause<<std::endl;
+
+
+    FILE* infileOctet;
+    
+        // Open person.dat for reading
+    infileOctet = fopen("logsOctet.bin", "wb+");
+    if (infileOctet == NULL) {
+        fprintf(stderr, "\nError opening file\n");
+        exit(1);
+    }
+
+        struct OctetString pdu;
+    
+        // setting pointer to start of the file
+        rewind(infileOctet);
+    
+        // reading to read_struct
+        fread(&pdu, sizeof(pdu), 1, infileOctet);
+
+        // close file
+        fclose(infileOctet);
+        // printf("%d\n", temp.value);
+
+
+
 
 
 
@@ -108,7 +130,7 @@ void RlsUdpTask::onLoop()
     FILE* infile;
     
         // Open person.dat for reading
-    infile = fopen("logs.bin", "wb+");
+    infile = fopen("logsTmsi.bin", "wb+");
     if (infile == NULL) {
         fprintf(stderr, "\nError opening file\n");
         exit(1);
