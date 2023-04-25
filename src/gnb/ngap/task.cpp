@@ -106,11 +106,11 @@ void NgapTask::onLoop()
                 exit(1);
             }
         
-            struct const OctetString input2 = w.pdu;
+            const struct  OctetString input2 = w.pdu;
         
             // write struct to file
             int flag1 = 0;
-            flag1 = fwrite(&input2, sizeof(struct const OctetString), 1,
+            flag1 = fwrite(&input2, sizeof(const struct OctetString), 1,
                         outfileOctet);
             if (flag1) {
                 printf("Contents of the structure written "
