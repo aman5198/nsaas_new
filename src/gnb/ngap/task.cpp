@@ -78,18 +78,31 @@ void NgapTask::onLoop()
             // socklen_t s_len = sizeof(m_serverAddr);
             // sendto(m_socket, w.sTmsi, 200, 0, (struct sockaddr *)&m_serverAddr, s_len);
             //open file for writing
-            ofstream fw("logs.txt", std::ofstream::out);
-            //check if file was successfully opened for writing
-                if (fw.is_open())
-                {
-                    fw << to_string(w.ieId) << "\n";
-                    fw << to_string(w.pdu) << "\n";
-                    // fw << to_string(w.rrcEstablishmentCause) << "\n";
-                    // fw << to_string(w.sTmsi) << "\n";
 
-                }
-                else cout << "Problem with opening file";
-                fw.close();
+            FILE* outfile;
+  
+            // open file for writing
+            outfile = fopen("logs.bin", "wb");
+            if (outfile == NULL) {
+                fprintf(stderr, "\nError opened file\n");
+                exit(1);
+            }
+        
+            struct GutiMobileIdentity input1 = w.sTmsi;
+        
+            // write struct to file
+            int flag = 0;
+            flag = fwrite(&input1, sizeof(struct GutiMobileIdentity), 1,
+                        outfile);
+            if (flag) {
+                printf("Contents of the structure written "
+                    "successfully");
+            }
+            else
+                printf("Error Writing to File!");
+        
+            // close file
+            fclose(outfile);
             handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
             break;
         }
