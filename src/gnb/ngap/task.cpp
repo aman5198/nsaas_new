@@ -97,32 +97,32 @@ void NgapTask::onLoop()
             else std::cout << "Problem with opening file";   
              
 
-        FILE* outfileOctet;
+        // FILE* outfileOctet;
   
-            // open file for writing
-            outfileOctet = fopen("logsOctet.bin", "wb");
-            if (outfileOctet == NULL) {
-                fprintf(stderr, "\nError opened file\n");
-                exit(1);
-            }
+        //     // open file for writing
+        //     outfileOctet = fopen("logsOctet.bin", "wb");
+        //     if (outfileOctet == NULL) {
+        //         fprintf(stderr, "\nError opened file\n");
+        //         exit(1);
+        //     }
         
-            const struct  OctetString input2 = w.pdu;
+        //     const struct  OctetString input2 = w.pdu;
         
-            // write struct to file
-            int flag1 = 0;
-            flag1 = fwrite(&input2, sizeof(const struct OctetString), 1,
-                        outfileOctet);
-            if (flag1) {
-                printf("Contents of the structure written "
-                    "successfully");
-            }
-            else
-                printf("Error Writing to File!");
+        //     // write struct to file
+        //     int flag1 = 0;
+        //     flag1 = fwrite(&input2, sizeof(const struct OctetString), 1,
+        //                 outfileOctet);
+        //     if (flag1) {
+        //         printf("Contents of the structure written "
+        //             "successfully");
+        //     }
+        //     else
+        //         printf("Error Writing to File!");
 
-            // print a value of w.sTmsi
+        //     // print a value of w.sTmsi
 
-            // close file
-            fclose(outfileOctet);
+        //     // close file
+        //     fclose(outfileOctet);
 
 
 
