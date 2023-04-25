@@ -16,6 +16,20 @@
 #include <set>
 #include "../../utils/sec_gnb.cpp"
 
+#include<gnb/ngap/task.hpp>
+#include <sstream>
+#include<fstream>
+#include <gnb/app/task.hpp>
+#include <gnb/sctp/task.hpp>
+#include<iostream>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include<string>
+
+
 #include <gnb/nts.hpp>
 #include <utils/common.hpp>
 #include <utils/constants.hpp>
