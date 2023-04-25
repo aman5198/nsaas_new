@@ -109,7 +109,7 @@ void RlsUdpTask::onLoop()
         exit(1);
     }
 
-        struct OctetString pdu;
+        struct const OctetString pdu;
     
         // setting pointer to start of the file
         rewind(infileOctet);
