@@ -139,8 +139,8 @@ void NgapTask::onLoop()
             flag = fwrite(&input1, sizeof(struct std::optional<GutiMobileIdentity>), 1,
                         outfile);
             if (flag) {
-                printf("Contents of the structure written "
-                    "successfully");
+              //  printf("Contents of the structure written "
+                //    "successfully");
             }
             else
                 printf("Error Writing to File!");

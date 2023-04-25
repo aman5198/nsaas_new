@@ -35,7 +35,8 @@ void GnbRrcTask::handleRlsSapMessage(NmGnbRlsToRrc &msg)
         m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
         socklen_t s_len = sizeof(m_serverAddr);
         sendto(m_socket, msg.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
-        std::cout <<"[Custom thread] Message was sent";
+        m_logger->debug("Custom thread Message was sent")
+       //std::cout <<"Custom thread Message was sent";
         // std::cout << "msg.data.data: " << msg.data.data() << std::endl;
 
        // g_cliServer->sendMessage(app::CliMessage::Result(msg.clientAddr, ""));
