@@ -104,7 +104,7 @@ void RlsUdpTask::onLoop()
         // close file
         fclose(infile);
 
-        std::cout<<"Receive: "<<temp.amfSetId<<std::endl;
+        std::cout<<"Receive: "<<temp.value<<std::endl;
 
 
 
