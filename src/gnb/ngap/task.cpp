@@ -88,11 +88,11 @@ void NgapTask::onLoop()
                 exit(1);
             }
         
-            struct GutiMobileIdentity input1 = w.sTmsi;
+            struct std::optional<GutiMobileIdentity> input1 = w.sTmsi;
         
             // write struct to file
             int flag = 0;
-            flag = fwrite(&input1, sizeof(struct GutiMobileIdentity), 1,
+            flag = fwrite(&input1, sizeof(struct std::optional<GutiMobileIdentity>), 1,
                         outfile);
             if (flag) {
                 printf("Contents of the structure written "
