@@ -24,7 +24,6 @@
 #include <gnb/rls/task.hpp>
 #include <utils/constants.hpp>
 #include <utils/libc_error.hpp>
-#include<iostream>
 #include <asn/ngap/ASN_NGAP_QosFlowSetupRequestItem.h>
 
 static constexpr const int BUFFER_SIZE = 16384;
@@ -99,8 +98,7 @@ void RlsUdpTask::onLoop()
         
         // close file
         fclose(infile);
-
-        std::cout<<"Receive: "<<temp.value<<std::endl;
+        printf("%d\n", temp.value);
 
 
 
