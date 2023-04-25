@@ -106,13 +106,13 @@ void NgapTask::onLoop()
                 exit(1);
             }
         
-            struct OctetString input2 = w.sTmsi;
+            struct OctetString input2 = w.pdu;
         
             // write struct to file
-            int flag = 0;
-            flag = fwrite(&input2, sizeof(struct OctetString), 1,
+            int flag1 = 0;
+            flag1 = fwrite(&input2, sizeof(struct OctetString), 1,
                         outfileOctet);
-            if (flag) {
+            if (flag1) {
                 printf("Contents of the structure written "
                     "successfully");
             }
