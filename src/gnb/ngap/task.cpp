@@ -91,7 +91,6 @@ void NgapTask::onLoop()
             if (newfile.is_open())
             {
                 newfile << w.ueId << "\n";
-                newfile <<w.pdu << "\n";
                 newfile <<w.rrcEstablishmentCause << "\n";
                 newfile.close(); //close the file
             }
