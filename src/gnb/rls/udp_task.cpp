@@ -98,7 +98,7 @@ void RlsUdpTask::onLoop()
         
         // close file
         fclose(infile);
-        printf("%d\n", temp.value);
+        // printf("%d\n", temp.value);
 
 
 
