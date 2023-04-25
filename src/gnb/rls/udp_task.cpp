@@ -84,7 +84,7 @@ void RlsUdpTask::onLoop()
     int ueID, pdu;
     int64_t w.rrcEstablishmentCause;
 
-    fstream newfile;
+    std::fstream newfile;
     newfile.open("tpoint.txt",ios::in); 
     if (newfile.is_open()){ 
 
