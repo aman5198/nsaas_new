@@ -110,8 +110,8 @@ void RlsUdpTask::onLoop()
         newfile.close();
 
     }
-    std::cout<<"ueID is "<<ueID<<std::endl;
-    std::cout<<"w.rrcEstablishmentCause is "<<rrcEstablishmentCause<<std::endl;
+    //std::cout<<"ueID is "<<ueID<<std::endl;
+    //std::cout<<"w.rrcEstablishmentCause is "<<rrcEstablishmentCause<<std::endl;
 
 
  //   FILE* infileOctet;
@@ -204,7 +204,7 @@ void RlsUdpTask::onLoop()
     {
         auto rlsMsg = rls::DecodeRlsMessage(OctetView{buffer, static_cast<size_t>(size)});
         if (rlsMsg == nullptr)
-            m_logger->err("Unable to decode RLS message");
+            m_logger->debug("Forwarding to 5G Core.");
         else
             receiveRlsPdu(peerAddress, std::move(rlsMsg));
     }
