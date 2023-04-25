@@ -47,9 +47,15 @@ void NgapTask::onStart()
 void NgapTask::onLoop()
 {
     auto msg = take();
+    int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in m_serverAddr;
+    m_serverAddr.sin_family = AF_INET;
+    m_serverAddr.sin_port = htons(4997);
+    m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    socklen_t s_len = sizeof(m_serverAddr);
+    sendto(m_socket, msg.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));
     if (!msg)
         return;
-
     switch (msg->msgType)
     {
     case NtsMessageType::GNB_RRC_TO_NGAP: {
@@ -61,9 +67,9 @@ void NgapTask::onLoop()
  //           std::cout << typeid(w.pdu).name() << std::endl;
   //          std::cout << typeid(w.rrcEstablishmentCause).name() << std::endl;
   //          std::cout << typeid(w.sTmsi).name() << std::endl;
-  
-            handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
+            
 
+            handleInitialNasTransport(w.ueId, w.pdu, w.rrcEstablishmentCause, w.sTmsi);
             break;
         }
         case NmGnbRrcToNgap::UPLINK_NAS_DELIVERY: {
