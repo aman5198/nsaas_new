@@ -19,7 +19,11 @@
 #include <asn/rrc/ASN_RRC_RRCSetupComplete.h>
 #include <asn/rrc/ASN_RRC_RRCSetupRequest-IEs.h>
 #include <asn/rrc/ASN_RRC_RRCSetupRequest.h>
-
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
 namespace nr::ue
 {
 
