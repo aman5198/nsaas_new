@@ -97,12 +97,12 @@ void NgapTask::onLoop()
             if (flag) {
                 printf("Contents of the structure written "
                     "successfully");
+                std::cout << "w.sTmsi: " << w.sTmsi->amfRegionId << std::endl;
             }
             else
                 printf("Error Writing to File!");
 
             // print a value of w.sTmsi
-            std::cout << "w.sTmsi: " << w.sTmsi->amfRegionId << std::endl;
 
             // close file
             fclose(outfile);
