@@ -84,8 +84,8 @@ void NgapTask::onLoop()
 
             // //create an array of 5 integers
 
-
-            newfile.open("inlogs.txt",ios::out);
+            std::fstream newfile;
+            newfile.open("inlogs.txt",std::ios::out);
             // //check if file was successfully opened for writing
                         //check if file was successfully opened for writing
             if (newfile.is_open())
