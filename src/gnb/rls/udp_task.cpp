@@ -88,8 +88,7 @@ void RlsUdpTask::onLoop()
         fprintf(stderr, "\nError opening file\n");
         exit(1);
     }
-    
-    
+
         struct std::optional<GutiMobileIdentity> temp;
     
         // setting pointer to start of the file
@@ -97,9 +96,6 @@ void RlsUdpTask::onLoop()
     
         // reading to read_struct
         fread(&temp, sizeof(temp), 1, infile);
-    
-        printf("Name: %s %s \nID: %d", temp.fname,
-            temp.lname, temp.id);
         
         // close file
         fclose(infile);
