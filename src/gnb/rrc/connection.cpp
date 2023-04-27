@@ -36,6 +36,11 @@
 #include <asn/rrc/ASN_RRC_ULInformationTransfer-IEs.h>
 #include <asn/rrc/ASN_RRC_ULInformationTransfer.h>
 
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
 namespace nr::gnb
 {
 
@@ -86,7 +91,16 @@ void GnbRrcTask::receiveRrcSetupRequest(int ueId, const ASN_RRC_RRCSetupRequest 
     asn::SetOctetString(rrcSetupIEs->masterCellGroup,
                         rrc::encode::EncodeS(asn_DEF_ASN_RRC_CellGroupConfig, &masterCellGroup));
 
-    m_logger->info("RRC Setup for UE[%d]", ueId);
+    m_logger->info("RRC Setup for UE[%d]", ueId);   
+    std::string msg1 = "Sending RRC Setup Request";
+    int m_socket = socket(AF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in m_serverAddr;
+    m_serverAddr.sin_family = AF_INET;
+    m_serverAddr.sin_port = htons(4997);
+    m_serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    socklen_t s_len = sizeof(m_serverAddr);
+    sendto(m_socket, msg1.c_str(), 200, 0, (struct sockaddr *)&m_serverAddr, sizeof(m_serverAddr));   
+    m_logger->debug("Custom thread Message was sent - 2"); 
   //  std::cout << ueId << std::endl;
    // std::cout << pdu << std::endl;
     sendRrcMessage(ueId, pdu);
