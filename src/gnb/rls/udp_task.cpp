@@ -7,7 +7,7 @@
 //
 
 #include "udp_task.hpp"
-#include<iostream>
+#include <iostream>
 #include <cmath>
 #include <cstdint>
 #include <cstring>
@@ -15,6 +15,7 @@
 #include <string>
 #include <set>
 #include "../../utils/sec_gnb.cpp"
+#include "../../utils/slice.cpp"
 
 #include<gnb/ngap/task.hpp>
 #include <sstream>
@@ -195,6 +196,47 @@ void RlsUdpTask::onLoop()
         }
         std::cout<<"port of sec gnb is "<<port<<std::endl;
         addSecGnb(1,1,ip,port);
+    }
+        
+    std::string header_slice = "01010111";
+    bool header_slice_match = true;
+    for(int i = 0;i<8;i++){
+        if(buffer[i]!=header_slice[i]){
+            header_slice_match = false;
+            break;
+        }
+    }
+    if(header_slice_match){ // parse the packet to add secondary gnb
+        std::string ip = "";
+        for(int i = 8;i<18;i++){
+            ip = ip + (char)buffer[i];
+        }
+        std::cout<<"ip address of new slice is "<<ip<<std::endl;
+
+
+        std::string port = "";
+        for(int i = 18;i<22;i++){
+            port = port + (char)buffer[i];
+        }
+        std::cout<<"port of new slice is "<<port<<std::endl;
+
+        std::string slice_sst = "";
+        for(int i = 22;i<23;i++){
+            slice_sst = slice_sst + (char)buffer[i];
+        }
+        std::cout << "slice sst is " << slice_sst << std::endl;
+
+
+        std::string slice_sd = "";
+        for(int i = 23;i<29;i++){
+            slice_sd = slice_sd + (char)buffer[i];
+        }
+        std::cout << "slice sd is " << slice_sd << std::endl;
+        std::string command  = "python3 Nsaas_scripts/add_slice.py --sst " + slice_sst + " --sd " +  slice_sd + " --addr " + ip + " --port " + port;
+        std::string terminal_cmd = "gnome-terminal -- bash -c \"" + command + "; exec bash\"";
+        system(terminal_cmd.c_str());
+        // addSlice(ip,port,slice_sst,slice_sd);
+        return;
     }
     // auto &w = dynamic_cast<NmGnbRrcToNgap &>(*msg);
     // w.ueId = 1;
