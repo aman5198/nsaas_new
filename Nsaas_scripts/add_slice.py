@@ -27,6 +27,19 @@ def append_slice_config(input_file):
     output_file = input_file[:-5] + "_slice.yaml"
     with open(output_file, 'w') as f:
         yaml.dump(data, f)
+    return output_file
+
+
+def append_gnb_config(input_file):
+    print("input file: ", input_file)
+    with open(input_file) as f:
+        data = yaml.load(f)
+    slice_obj1 = {'sst': args.sst, 'sd': args.sd}
+    data['slices'].append(slice_obj1)
+    output_file = input_file[:-5] + "_slice.yaml"
+    with open(output_file, 'w') as f:
+        yaml.dump(data, f)
+    return output_file
 
 
 def getCommandOutput(consoleCommand, consoleOutputEncoding="utf-8", timeout=10):
@@ -46,27 +59,16 @@ def getCommandOutput(consoleCommand, consoleOutputEncoding="utf-8", timeout=10):
 
     return isRunCmdOk, consoleOutput
 
-
+# kill the gnb
 cmd_gnb = "ps aux | grep gnb | grep -v grep"
 output = getCommandOutput(cmd_gnb)
 gnb_id = output[1].split()[1] if output[0] else None
-
 os.system("kill -9 {}".format(gnb_id))
-
+gnb_config_file = output[1].split()[-1] if output[0] else None
 
 cmd_amfd = "ps aux | grep amfd | grep -v grep"
 output = getCommandOutput(cmd_amfd)
 amf_id = output[1].split()[1] if output[0] else None
-config_file = output[1].split()[-1] if output[0] else None
-print("config file: ", config_file)
-base_address = output[1].split()[10].split('open5gs')[0]
-print("base address: ", base_address)
-open5gs_base_address = base_address + "open5gs/"
-print("open5gs base address: ", open5gs_base_address)
-sample_config_file = open5gs_base_address + config_file
-print("sample config file: ", sample_config_file)
-
-append_slice_config(sample_config_file)
 
 cmd_smfd = "ps aux | grep smfd | grep -v grep"
 output = getCommandOutput(cmd_smfd)
@@ -76,23 +78,33 @@ cmd_nssf = "ps aux | grep nssf | grep -v grep"
 output = getCommandOutput(cmd_nssf)
 nssf_id = output[1].split()[1] if output[0] else None
 
-config_file = output[1].split()[-1] if output[0] else None
-UERANSIM_base_address = base_address + "UERANSIM/"
-
-# now kill the processes 
+# now kill all the open5gs processes 
 cmd_kill = "kill -9 {} {} {}".format(amf_id, smf_id, nssf_id)
 os.system(cmd_kill)
 
+
+config_file = output[1].split()[-1] if output[0] else None
+base_address = output[1].split()[10].split('open5gs')[0]
+open5gs_base_address = base_address + "open5gs/"
+sample_config_file = open5gs_base_address + config_file
+new_sample_config_file = append_slice_config(sample_config_file)
+new_sample_config_file_relative_address = new_sample_config_file.split(open5gs_base_address)[-1]
+
+UERANSIM_base_address = base_address + "nsaas_new/"
+sample_gnb_config_file = UERANSIM_base_address + gnb_config_file
+new_sample_gnb_config_file = append_gnb_config(sample_gnb_config_file)
+new_sample_gnb_config_file_relative_address = new_sample_gnb_config_file.split(UERANSIM_base_address)[-1]
+
+
 # now start the processes with the new config
-cmd_start_amf = f"cd {open5gs_base_address} && ./install/bin/open5gs-amfd -c build/configs/sample_slice.yaml &"
-cmd_start_smf = f"cd {open5gs_base_address} && ./install/bin/open5gs-smfd &"
-cmd_start_nssf = f"cd {open5gs_base_address} && ./install/bin/open5gs-nssfd -c build/configs/sample_slice.yaml &"
-# TODO: edit the gnb config file as well/ currently we are assuming that it has information about the slice
-cmd_start_gnb = f"cd {UERANSIM_base_address} && ./build/nr-gnb -c config/open5gs-gnb.yaml &"
+cmd_start_amf = f"cd {open5gs_base_address} && {open5gs_base_address}build/src/amf/open5gs-amfd -c {new_sample_config_file_relative_address} &"
+cmd_start_smf = f"cd {open5gs_base_address} && {open5gs_base_address}build/src/smf/open5gs-smfd -c {new_sample_config_file_relative_address} &"
+cmd_start_nssf = f"cd {open5gs_base_address} && {open5gs_base_address}build/src/nssf/open5gs-nssfd -c {new_sample_config_file_relative_address} &"
+cmd_start_gnb = f"cd {UERANSIM_base_address} && ./build/nr-gnb -c {new_sample_gnb_config_file_relative_address} &"
+
 
 # start the processes in diff threads and wait for 5 seconds after each 
-TIME_GAP = 5
-
+TIME_GAP = 2
 os.system(cmd_start_amf)
 time.sleep(TIME_GAP)
 os.system(cmd_start_smf)

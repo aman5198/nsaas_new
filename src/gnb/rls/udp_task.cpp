@@ -15,7 +15,6 @@
 #include <string>
 #include <set>
 #include "../../utils/sec_gnb.cpp"
-#include "../../utils/slice.cpp"
 
 #include<gnb/ngap/task.hpp>
 #include <sstream>

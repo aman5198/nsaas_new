@@ -34,4 +34,5 @@ if __name__ == "__main__":
     print(primIp)
     print(primPort)
     packet = add_new_slice.createPacket('127.0.0.25','4997','1','000090')
+    # packet = add_new_slice.createPacket('127.0.0.35','4997','1','000900')
     add_new_slice.sendReq(packet,primIp,primPort)
